@@ -114,6 +114,69 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    .donors-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .donors-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 16px;
+    }
+    .donor-list {
+      list-style: none;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .donor-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .donor-item:last-child {
+      border-bottom: none;
+    }
+    .donor-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .donor-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .donor-name {
+      font-weight: 500;
+      color: #1f2937;
+      font-size: 14px;
+    }
+    .donor-date {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .donor-amount {
+      font-weight: 600;
+      color: #22c55e;
+      font-size: 14px;
+    }
+    .no-donors {
+      text-align: center;
+      color: #9ca3af;
+      padding: 20px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -161,6 +224,28 @@
                 ${data.donorPercent >= 15 ? `<span class="progress-percent">${data.donorPercent}%</span>` : ''}
               </div>
             </div>
+          </div>
+
+          <div class="donors-section">
+            <h3 class="donors-title">Recent Donors</h3>
+            ${data.donors && data.donors.length > 0 ? `
+              <ul class="donor-list">
+                ${data.donors.map(donor => `
+                  <li class="donor-item">
+                    <div class="donor-info">
+                      <div class="donor-avatar">${donor.name.charAt(0).toUpperCase()}</div>
+                      <div>
+                        <div class="donor-name">${donor.name}</div>
+                        <div class="donor-date">${new Date(donor.date).toLocaleDateString()}</div>
+                      </div>
+                    </div>
+                    <span class="donor-amount">$${donor.amount.toLocaleString()}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            ` : `
+              <p class="no-donors">No donations yet. Be the first!</p>
+            `}
           </div>
 
           <p class="updated">Last updated: ${new Date(data.lastUpdated).toLocaleString()}</p>

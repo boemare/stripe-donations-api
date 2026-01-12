@@ -54,6 +54,15 @@ module.exports = async function handler(req, res) {
     const donorCount = donationSessions.length;
     const totalAmount = donationSessions.reduce((sum, s) => sum + (s.amount_total || 0), 0) / 100;
 
+    // Get donor details (sorted by most recent first)
+    const donors = donationSessions
+      .sort((a, b) => b.created - a.created)
+      .map(session => ({
+        name: session.customer_details?.name || 'Anonymous',
+        amount: (session.amount_total || 0) / 100,
+        date: new Date(session.created * 1000).toISOString(),
+      }));
+
     // Calculate percentages
     const amountPercent = Math.min((totalAmount / GOAL_AMOUNT) * 100, 100);
     const donorPercent = Math.min((donorCount / GOAL_DONORS) * 100, 100);
@@ -65,6 +74,7 @@ module.exports = async function handler(req, res) {
       goalAmount: GOAL_AMOUNT,
       amountPercent: Math.round(amountPercent * 10) / 10,
       donorPercent: Math.round(donorPercent * 10) / 10,
+      donors,
       lastUpdated: new Date().toISOString(),
     });
   } catch (error) {
