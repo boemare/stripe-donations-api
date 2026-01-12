@@ -3,7 +3,7 @@ const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Configuration - update these values for your campaign
-const GOAL_AMOUNT = 10000;  // Target amount in dollars
+const GOAL_AMOUNT = 5000;   // Target amount in dollars
 const GOAL_DONORS = 100;    // Target number of donors
 
 // Your payment link ID
