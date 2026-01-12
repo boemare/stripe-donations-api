@@ -6,28 +6,46 @@
   <title>Support Our Mission</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-cream: #FFFBF5;
-      --color-cream-dark: #F7F3ED;
-      --color-ivory: rgba(255, 251, 245, 0.92);
-      --color-text: #2D2A26;
-      --color-text-soft: #5C5752;
-      --color-text-muted: #9C9891;
-      --color-coral: #E8998D;
-      --color-coral-deep: #D4847A;
-      --color-sage: #7FB685;
-      --color-sage-deep: #5A9E62;
-      --color-peach: #FFE5D9;
-      --color-border: rgba(45, 42, 38, 0.08);
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'Outfit', system-ui, sans-serif;
-      --shadow-soft: 0 4px 24px rgba(45, 42, 38, 0.06);
-      --shadow-elevated: 0 12px 48px rgba(45, 42, 38, 0.12);
-      --radius-sm: 12px;
-      --radius-md: 20px;
-      --radius-lg: 28px;
+      /* Core palette */
+      --color-cream: #F9F5EB;
+      --color-cream-dark: #EDE9DF;
+      --color-cream-rgb: 249, 245, 235;
+
+      /* Forest green spectrum */
+      --color-forest: #16231B;
+      --color-forest-mid: #1E2F24;
+      --color-forest-light: #2A3D2E;
+      --color-sage: #4A6B50;
+      --color-mint: #E8F0E9;
+
+      /* Text colors */
+      --color-text: #16231B;
+      --color-text-soft: #3D4A3F;
+      --color-text-muted: #6B7A6D;
+      --color-text-light: #F9F5EB;
+
+      /* Functional */
+      --color-border: rgba(22, 35, 27, 0.1);
+      --color-border-dark: rgba(22, 35, 27, 0.15);
+
+      /* Typography */
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(22, 35, 27, 0.06);
+      --shadow-md: 0 8px 32px rgba(22, 35, 27, 0.08);
+      --shadow-lg: 0 16px 48px rgba(22, 35, 27, 0.12);
+      --shadow-btn: 0 4px 16px rgba(22, 35, 27, 0.25);
+      --shadow-btn-hover: 0 8px 24px rgba(22, 35, 27, 0.35);
+
+      /* Spacing & Radius */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
     }
 
     * {
@@ -39,127 +57,105 @@
     html {
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       background: transparent;
       min-height: 100vh;
       color: var(--color-text);
+      line-height: 1.5;
     }
 
+    /* Demo mode background */
     body.demo {
       background: var(--color-cream);
-      background-image:
-        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(232, 153, 141, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 80% at 90% 80%, rgba(127, 182, 133, 0.12) 0%, transparent 50%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 32px;
       position: relative;
-      overflow-x: hidden;
     }
 
-    /* Floating organic shapes */
-    .bg-shape {
+    /* Subtle pattern overlay */
+    body.demo::before {
+      content: '';
       position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(22, 35, 27, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
       pointer-events: none;
-      z-index: -1;
     }
 
-    .bg-shape-1 {
-      width: 400px;
-      height: 400px;
-      background: var(--color-peach);
-      top: -100px;
-      left: -100px;
-      animation: float1 20s ease-in-out infinite;
-    }
-
-    .bg-shape-2 {
-      width: 300px;
-      height: 300px;
-      background: rgba(127, 182, 133, 0.3);
-      bottom: -50px;
-      right: -50px;
-      animation: float2 25s ease-in-out infinite;
-    }
-
-    @keyframes float1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, 20px) scale(1.05); }
-    }
-
-    @keyframes float2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-20px, -30px) scale(1.08); }
-    }
-
-    /* Widget Container */
+    /* Widget */
     .widget {
       width: 100%;
-      max-width: 420px;
-      background: var(--color-ivory);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      max-width: 400px;
+      background: rgba(var(--color-cream-rgb), 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 36px 32px;
-      box-shadow: var(--shadow-elevated);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-lg);
       position: relative;
-      overflow: hidden;
     }
 
+    /* Decorative top accent */
     .widget::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 20%;
-      right: 20%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232, 153, 141, 0.5), transparent);
+      left: 32px;
+      right: 32px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-forest), transparent);
+      border-radius: 0 0 2px 2px;
+      opacity: 0.6;
     }
 
     /* Header */
     .widget-header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       opacity: 0;
-      animation: fadeUp 0.6s ease 0.1s forwards;
+      animation: fadeUp 0.7s ease 0.1s forwards;
     }
 
-    .widget-badge {
+    .widget-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: var(--color-peach);
-      color: var(--color-coral-deep);
+      gap: 8px;
+      font-family: var(--font-sans);
       font-size: 0.6875rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 16px;
+      letter-spacing: 0.12em;
+      color: var(--color-sage);
+      margin-bottom: 12px;
     }
 
-    .widget-badge svg {
-      width: 12px;
-      height: 12px;
+    .widget-eyebrow::before,
+    .widget-eyebrow::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--color-border-dark);
     }
 
     .widget-title {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 600;
+      font-family: var(--font-serif);
+      font-size: 1.875rem;
+      font-weight: 400;
       color: var(--color-text);
-      line-height: 1.2;
-      margin-bottom: 6px;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .widget-title em {
+      font-style: italic;
     }
 
     .widget-subtitle {
@@ -168,91 +164,92 @@
       font-weight: 400;
     }
 
-    /* Progress Circle */
-    .progress-section {
+    /* Stats Section */
+    .stats-section {
       display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.2s forwards;
-    }
-
-    .progress-circle-container {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-    }
-
-    .progress-circle {
-      transform: rotate(-90deg);
-      width: 100px;
-      height: 100px;
-    }
-
-    .progress-circle-bg {
-      fill: none;
-      stroke: var(--color-cream-dark);
-      stroke-width: 8;
-    }
-
-    .progress-circle-fill {
-      fill: none;
-      stroke: url(#progressGradient);
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-dasharray: 251.2;
-      stroke-dashoffset: 251.2;
-      transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .progress-percent-display {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-text);
+      gap: 32px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--color-border);
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
     }
 
-    .progress-details {
-      flex: 1;
+    .stat-item {
+      text-align: center;
     }
 
-    .progress-amount {
-      font-family: var(--font-display);
+    .stat-value {
+      font-family: var(--font-serif);
       font-size: 2rem;
-      font-weight: 700;
-      color: var(--color-text);
+      font-weight: 400;
+      color: var(--color-forest);
       line-height: 1;
       margin-bottom: 4px;
     }
 
-    .progress-goal {
-      font-size: 0.875rem;
+    .stat-label {
+      font-size: 0.75rem;
       color: var(--color-text-muted);
-      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .progress-donors {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(127, 182, 133, 0.15);
-      color: var(--color-sage-deep);
+    /* Progress Section */
+    .progress-section {
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .progress-text {
       font-size: 0.8125rem;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 100px;
+      color: var(--color-text-soft);
     }
 
-    .progress-donors svg {
-      width: 14px;
-      height: 14px;
+    .progress-percent {
+      font-family: var(--font-serif);
+      font-size: 0.9375rem;
+      color: var(--color-forest);
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--color-mint);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-forest-light), var(--color-forest));
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--color-forest);
+      border: 2px solid var(--color-cream);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(22, 35, 27, 0.15);
     }
 
     /* Donate Button */
@@ -262,37 +259,38 @@
       justify-content: center;
       gap: 10px;
       width: 100%;
-      padding: 18px 28px;
-      background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-coral-deep) 100%);
-      color: white;
-      font-family: var(--font-body);
-      font-size: 1.0625rem;
-      font-weight: 600;
-      text-align: center;
+      padding: 16px 24px;
+      background: var(--color-forest);
+      color: var(--color-text-light);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       text-decoration: none;
       border: none;
       border-radius: var(--radius-md);
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 24px rgba(232, 153, 141, 0.4);
+      box-shadow: var(--shadow-btn);
       position: relative;
       overflow: hidden;
       opacity: 0;
-      animation: fadeUp 0.6s ease 0.3s forwards;
+      animation: fadeUp 0.7s ease 0.4s forwards;
     }
 
     .donate-btn::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .donate-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(232, 153, 141, 0.5);
+      background: var(--color-forest-mid);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-btn-hover);
     }
 
     .donate-btn:hover::before {
@@ -300,12 +298,12 @@
     }
 
     .donate-btn:active {
-      transform: translateY(-1px);
+      transform: translateY(0);
     }
 
     .donate-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       transition: transform 0.3s ease;
     }
 
@@ -315,47 +313,49 @@
 
     /* Donors Section */
     .donors-section {
-      margin-top: 28px;
-      padding-top: 24px;
+      margin-top: 24px;
+      padding-top: 20px;
       border-top: 1px solid var(--color-border);
       opacity: 0;
-      animation: fadeUp 0.6s ease 0.4s forwards;
+      animation: fadeUp 0.7s ease 0.5s forwards;
     }
 
     .donors-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .donors-title {
-      font-family: var(--font-display);
+      font-family: var(--font-serif);
       font-size: 1rem;
-      font-weight: 600;
+      font-style: italic;
       color: var(--color-text);
     }
 
     .donors-count {
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       color: var(--color-text-muted);
-      background: var(--color-cream-dark);
+      background: var(--color-mint);
       padding: 4px 10px;
       border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .donor-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      max-height: 200px;
+      gap: 8px;
+      max-height: 180px;
       overflow-y: auto;
       padding-right: 4px;
     }
 
     .donor-list::-webkit-scrollbar {
-      width: 4px;
+      width: 3px;
     }
 
     .donor-list::-webkit-scrollbar-track {
@@ -363,7 +363,7 @@
     }
 
     .donor-list::-webkit-scrollbar-thumb {
-      background: var(--color-border);
+      background: var(--color-border-dark);
       border-radius: 100px;
     }
 
@@ -371,66 +371,64 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 14px;
-      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.5);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-sm);
       transition: all 0.2s ease;
     }
 
     .donor-item:hover {
-      background: rgba(255, 255, 255, 0.9);
-      transform: translateX(4px);
+      background: rgba(255, 255, 255, 0.8);
+      border-color: var(--color-border-dark);
     }
 
     .donor-info {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .donor-avatar {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-peach) 0%, var(--color-coral) 100%);
+      background: var(--color-forest);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: white;
-      box-shadow: 0 2px 8px rgba(232, 153, 141, 0.3);
+      font-family: var(--font-serif);
+      font-size: 0.8125rem;
+      font-style: italic;
+      color: var(--color-text-light);
     }
 
     .donor-name {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 500;
       color: var(--color-text);
-      margin-bottom: 2px;
     }
 
     .donor-date {
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       color: var(--color-text-muted);
     }
 
     .donor-amount {
-      font-family: var(--font-display);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--color-sage-deep);
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: var(--color-forest);
     }
 
     .no-donors {
       text-align: center;
-      padding: 24px;
+      padding: 20px;
       color: var(--color-text-muted);
-      font-size: 0.9375rem;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-style: italic;
+      background: rgba(255, 255, 255, 0.4);
       border: 1px dashed var(--color-border);
+      border-radius: var(--radius-sm);
     }
 
     /* Footer */
@@ -439,83 +437,72 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-      margin-top: 20px;
-      padding-top: 16px;
+      margin-top: 18px;
+      padding-top: 14px;
       border-top: 1px solid var(--color-border);
       opacity: 0;
-      animation: fadeUp 0.6s ease 0.5s forwards;
+      animation: fadeUp 0.7s ease 0.6s forwards;
     }
 
     .live-indicator {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     .live-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       background: var(--color-sage);
       border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .powered-by {
-      font-size: 0.6875rem;
-      color: var(--color-text-muted);
-      opacity: 0.7;
-    }
-
-    .powered-by a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .powered-by a:hover {
-      text-decoration: underline;
+      animation: pulse 2.5s ease-in-out infinite;
     }
 
     /* Loading */
     .loading {
       text-align: center;
-      padding: 60px 20px;
+      padding: 48px 20px;
     }
 
     .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--color-cream-dark);
-      border-top-color: var(--color-coral);
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--color-mint);
+      border-top-color: var(--color-forest);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 14px;
     }
 
     .loading-text {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       color: var(--color-text-muted);
+      font-style: italic;
     }
 
     /* Error */
     .error {
       text-align: center;
-      padding: 32px;
-      background: rgba(232, 153, 141, 0.1);
+      padding: 28px;
+      background: rgba(22, 35, 27, 0.04);
       border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
     }
 
     .error-text {
-      color: var(--color-coral-deep);
-      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+      font-size: 0.875rem;
     }
 
     /* Animations */
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -528,12 +515,12 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     /* Responsive */
-    @media (max-width: 480px) {
+    @media (max-width: 440px) {
       body.demo {
         padding: 16px;
       }
@@ -544,29 +531,20 @@
       }
 
       .widget-title {
-        font-size: 1.5rem;
+        font-size: 1.625rem;
       }
 
-      .progress-section {
-        flex-direction: column;
-        text-align: center;
+      .stats-section {
+        gap: 24px;
       }
 
-      .progress-details {
-        text-align: center;
-      }
-
-      .progress-amount {
-        font-size: 1.75rem;
+      .stat-value {
+        font-size: 1.625rem;
       }
     }
   </style>
 </head>
 <body class="demo">
-  <!-- Background shapes -->
-  <div class="bg-shape bg-shape-1"></div>
-  <div class="bg-shape bg-shape-2"></div>
-
   <div class="widget">
     <div id="content">
       <div class="loading">
@@ -576,17 +554,6 @@
     </div>
   </div>
 
-
-  <!-- SVG Gradient Definition -->
-  <svg width="0" height="0" style="position: absolute;">
-    <defs>
-      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#E8998D"/>
-        <stop offset="100%" stop-color="#7FB685"/>
-      </linearGradient>
-    </defs>
-  </svg>
-
   <script>
     const PAYMENT_LINK = 'https://buy.stripe.com/bJe28sdrnfy66pnear67S02';
 
@@ -595,11 +562,8 @@
 
       try {
         const res = await fetch('/api/donations');
-        if (!res.ok) throw new Error('Unable to load campaign data');
+        if (!res.ok) throw new Error('Unable to load');
         const data = await res.json();
-
-        const circumference = 251.2;
-        const offset = circumference - (data.amountPercent / 100) * circumference;
 
         const donorItems = data.donors && data.donors.length > 0
           ? data.donors.slice(0, 5).map(donor => `
@@ -618,35 +582,35 @@
 
         content.innerHTML = `
           <header class="widget-header">
-            <div class="widget-badge">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              Campaign Active
-            </div>
-            <h2 class="widget-title">Support Our Mission</h2>
-            <p class="widget-subtitle">Every contribution brings us closer to our goal</p>
+            <p class="widget-eyebrow">Campaign Active</p>
+            <h2 class="widget-title">Support <em>Our</em> Mission</h2>
+            <p class="widget-subtitle">Every contribution makes a difference</p>
           </header>
 
-          <div class="progress-section">
-            <div class="progress-circle-container">
-              <svg class="progress-circle" viewBox="0 0 100 100">
-                <circle class="progress-circle-bg" cx="50" cy="50" r="40"/>
-                <circle class="progress-circle-fill" cx="50" cy="50" r="40" id="progressCircle" style="stroke-dashoffset: ${circumference}"/>
-              </svg>
-              <div class="progress-percent-display">${Math.round(data.amountPercent)}%</div>
+          <div class="stats-section">
+            <div class="stat-item">
+              <div class="stat-value">$${data.totalAmount.toLocaleString()}</div>
+              <div class="stat-label">Raised</div>
             </div>
-            <div class="progress-details">
-              <div class="progress-amount">$${data.totalAmount.toLocaleString()}</div>
-              <div class="progress-goal">raised of $${data.goalAmount.toLocaleString()} goal</div>
-              <div class="progress-donors">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                ${data.donorCount} supporter${data.donorCount !== 1 ? 's' : ''}
-              </div>
+            <div class="stat-item">
+              <div class="stat-value">${data.donorCount}</div>
+              <div class="stat-label">Donors</div>
+            </div>
+          </div>
+
+          <div class="progress-section">
+            <div class="progress-header">
+              <span class="progress-text">$${data.goalAmount.toLocaleString()} goal</span>
+              <span class="progress-percent">${data.amountPercent}%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressBar"></div>
             </div>
           </div>
 
           <a href="${PAYMENT_LINK}" target="_blank" rel="noopener" class="donate-btn">
-            Donate Now
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            Contribute Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
@@ -661,24 +625,24 @@
             </div>
           ` : `
             <div class="donors-section">
-              <div class="no-donors">Be the first to support this campaign!</div>
+              <div class="no-donors">Be the first to support this campaign</div>
             </div>
           `}
 
           <footer class="widget-footer">
             <div class="live-indicator">
               <span class="live-dot"></span>
-              <span>Live updates</span>
+              <span>Live</span>
             </div>
           </footer>
         `;
 
-        // Animate progress circle
+        // Animate progress bar
         requestAnimationFrame(() => {
           setTimeout(() => {
-            const circle = document.getElementById('progressCircle');
-            if (circle) circle.style.strokeDashoffset = offset;
-          }, 400);
+            const bar = document.getElementById('progressBar');
+            if (bar) bar.style.width = Math.min(data.amountPercent, 100) + '%';
+          }, 300);
         });
 
       } catch (err) {
