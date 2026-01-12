@@ -6,12 +6,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const GOAL_AMOUNT = 10000;  // Target amount in dollars
 const GOAL_DONORS = 100;    // Target number of donors
 
-// Optional: Filter by specific payment link ID (leave empty to count all payments)
-const PAYMENT_LINK_ID = process.env.STRIPE_PAYMENT_LINK_ID || '';
+// Your payment link ID
+const PAYMENT_LINK_ID = 'plink_1SnHEFLJl2M6c3KIE6CFTw8x';
 
 export default async function handler(req, res) {
   // Handle CORS
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Update to your Framer domain in production
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -24,40 +24,35 @@ export default async function handler(req, res) {
   }
 
   try {
-    let allPayments = [];
+    // Use Checkout Sessions API - this has direct payment_link field
+    let allSessions = [];
     let hasMore = true;
     let startingAfter = undefined;
 
-    // Paginate through all payments
     while (hasMore) {
       const params = {
         limit: 100,
+        status: 'complete',  // Only completed checkouts
         ...(startingAfter && { starting_after: startingAfter }),
       };
 
-      const payments = await stripe.paymentIntents.list(params);
-      allPayments = allPayments.concat(payments.data);
-      hasMore = payments.has_more;
+      const sessions = await stripe.checkout.sessions.list(params);
+      allSessions = allSessions.concat(sessions.data);
+      hasMore = sessions.has_more;
 
-      if (payments.data.length > 0) {
-        startingAfter = payments.data[payments.data.length - 1].id;
+      if (sessions.data.length > 0) {
+        startingAfter = sessions.data[sessions.data.length - 1].id;
       }
     }
 
-    // Filter successful payments
-    let successfulPayments = allPayments.filter(p => p.status === 'succeeded');
-
-    // If a specific payment link is configured, filter by it
-    if (PAYMENT_LINK_ID) {
-      successfulPayments = successfulPayments.filter(p =>
-        p.metadata?.payment_link === PAYMENT_LINK_ID ||
-        p.payment_method_options?.link?.payment_link === PAYMENT_LINK_ID
-      );
-    }
+    // Filter to only sessions from our payment link
+    const donationSessions = allSessions.filter(session =>
+      session.payment_link === PAYMENT_LINK_ID
+    );
 
     // Calculate totals
-    const donorCount = successfulPayments.length;
-    const totalAmount = successfulPayments.reduce((sum, p) => sum + p.amount_received, 0) / 100;
+    const donorCount = donationSessions.length;
+    const totalAmount = donationSessions.reduce((sum, s) => sum + (s.amount_total || 0), 0) / 100;
 
     // Calculate percentages
     const amountPercent = Math.min((totalAmount / GOAL_AMOUNT) * 100, 100);
