@@ -477,91 +477,6 @@
       text-decoration: underline;
     }
 
-    /* Checkout Modal */
-    .checkout-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(45, 42, 38, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .checkout-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .checkout-modal {
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      background: white;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
-      transform: translateY(30px) scale(0.95);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .checkout-overlay.active .checkout-modal {
-      transform: translateY(0) scale(1);
-    }
-
-    .checkout-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--color-border);
-      background: var(--color-cream);
-    }
-
-    .checkout-title {
-      font-family: var(--font-display);
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--color-text);
-    }
-
-    .checkout-close {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      color: var(--color-text-soft);
-      transition: all 0.2s ease;
-    }
-
-    .checkout-close:hover {
-      background: var(--color-cream-dark);
-      color: var(--color-text);
-    }
-
-    .checkout-close svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .checkout-frame {
-      width: 100%;
-      height: 600px;
-      border: none;
-      background: white;
-    }
-
     /* Loading */
     .loading {
       text-align: center;
@@ -644,14 +559,6 @@
       .progress-amount {
         font-size: 1.75rem;
       }
-
-      .checkout-modal {
-        max-height: 85vh;
-      }
-
-      .checkout-frame {
-        height: 500px;
-      }
     }
   </style>
 </head>
@@ -669,25 +576,6 @@
     </div>
   </div>
 
-  <!-- Checkout Modal -->
-  <div class="checkout-overlay" id="checkoutOverlay">
-    <div class="checkout-modal">
-      <div class="checkout-header">
-        <span class="checkout-title">Complete Your Donation</span>
-        <button class="checkout-close" onclick="closeCheckout()" aria-label="Close">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M18 6L6 18M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-      <iframe
-        class="checkout-frame"
-        id="checkoutFrame"
-        src="about:blank"
-        allow="payment"
-      ></iframe>
-    </div>
-  </div>
 
   <!-- SVG Gradient Definition -->
   <svg width="0" height="0" style="position: absolute;">
@@ -701,36 +589,6 @@
 
   <script>
     const PAYMENT_LINK = 'https://buy.stripe.com/bJe28sdrnfy66pnear67S02';
-
-    function openCheckout() {
-      const overlay = document.getElementById('checkoutOverlay');
-      const frame = document.getElementById('checkoutFrame');
-      frame.src = PAYMENT_LINK;
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCheckout() {
-      const overlay = document.getElementById('checkoutOverlay');
-      const frame = document.getElementById('checkoutFrame');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        frame.src = 'about:blank';
-      }, 300);
-    }
-
-    // Close on overlay click
-    document.getElementById('checkoutOverlay').addEventListener('click', (e) => {
-      if (e.target.id === 'checkoutOverlay') {
-        closeCheckout();
-      }
-    });
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCheckout();
-    });
 
     async function fetchDonations() {
       const content = document.getElementById('content');
@@ -786,12 +644,12 @@
             </div>
           </div>
 
-          <button class="donate-btn" onclick="openCheckout()">
+          <a href="${PAYMENT_LINK}" target="_blank" rel="noopener" class="donate-btn">
             Donate Now
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
-          </button>
+          </a>
 
           ${data.donors && data.donors.length > 0 ? `
             <div class="donors-section">
