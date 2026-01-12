@@ -1,4 +1,4 @@
-import Stripe from 'stripe';
+const Stripe = require('stripe');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -9,7 +9,7 @@ const GOAL_DONORS = 100;    // Target number of donors
 // Your payment link ID
 const PAYMENT_LINK_ID = 'plink_1SnHEFLJl2M6c3KIE6CFTw8x';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Handle CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     while (hasMore) {
       const params = {
         limit: 100,
-        status: 'complete',  // Only completed checkouts
+        status: 'complete',
         ...(startingAfter && { starting_after: startingAfter }),
       };
 
@@ -74,4 +74,4 @@ export default async function handler(req, res) {
       message: error.message
     });
   }
-}
+};
